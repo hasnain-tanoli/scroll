@@ -1,33 +1,36 @@
 import conf from "../conf/conf";
 import { Client, Databases, ID, Storage, Query } from "appwrite";
 
-export class Service {
+class Service {
   client = new Client();
   databases;
   bucket;
 
   constructor() {
     this.client.setEndpoint(conf.appwriteURL).setProject(conf.projectID);
-
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
+  }
+
+  makeSafeSlug(slug) {
+    if (!slug) return undefined;
+
+    let safeSlug = slug.trim().toLowerCase();
+    safeSlug = safeSlug.replace(/[^a-z0-9\-_\.]/g, "-");
+    safeSlug = safeSlug.replace(/^[^a-z0-9]+/, "");
+    safeSlug = safeSlug.substring(0, 36);
+    return safeSlug || undefined;
   }
 
   // 📝 Create a Post
   async createPost({ slug, title, content, featuredImage, status, userId }) {
     try {
+      const safeId = this.makeSafeSlug(slug);
       return await this.databases.createDocument(
         conf.databaseID,
         conf.collectionId,
-        slug ?? ID.unique(),
-        {
-          slug, // ✅ ensure slug is saved in document
-          title,
-          content,
-          featuredImage,
-          status,
-          userId,
-        }
+        safeId ?? ID.unique(),
+        { slug, title, content, featuredImage, status, userId }
       );
     } catch (error) {
       console.error("Appwrite service :: createPost :: error", error);
@@ -36,18 +39,13 @@ export class Service {
   }
 
   // ✏️ Update a Post
-  async updatePost(slug, { title, content, featuredImage, status }) {
+  async updatePost(documentId, { title, content, featuredImage, status }) {
     try {
       return await this.databases.updateDocument(
         conf.databaseID,
         conf.collectionId,
-        slug,
-        {
-          title,
-          content,
-          featuredImage,
-          status,
-        }
+        documentId,
+        { title, content, featuredImage, status }
       );
     } catch (error) {
       console.error("Appwrite service :: updatePost :: error", error);
@@ -56,12 +54,12 @@ export class Service {
   }
 
   // ❌ Delete a Post
-  async deletePost(slug) {
+  async deletePost(documentId) {
     try {
       await this.databases.deleteDocument(
         conf.databaseID,
         conf.collectionId,
-        slug
+        documentId
       );
       return true;
     } catch (error) {
@@ -71,16 +69,16 @@ export class Service {
   }
 
   // 📄 Get a Single Post
-  async getPost(slug) {
+  async getPost(documentId) {
     try {
       return await this.databases.getDocument(
         conf.databaseID,
         conf.collectionId,
-        slug
+        documentId
       );
     } catch (error) {
       console.error("Appwrite service :: getPost :: error", error);
-      return false;
+      return null;
     }
   }
 
@@ -96,7 +94,7 @@ export class Service {
       );
     } catch (error) {
       console.error("Appwrite service :: getPosts :: error", error);
-      return false;
+      return [];
     }
   }
 
@@ -111,7 +109,7 @@ export class Service {
       return uploadedFile;
     } catch (error) {
       console.error("Appwrite service :: uploadFile :: error", error);
-      return false;
+      return null;
     }
   }
 
@@ -126,12 +124,12 @@ export class Service {
     }
   }
 
-  // 🖼️ Get File Preview
+  // 🖼️ Get File Preview / View
   getFileView(fileId) {
     try {
       return this.bucket.getFileView(conf.bucketID, fileId);
     } catch (error) {
-      console.error("Appwrite service :: getFilePreview :: error", error);
+      console.error("Appwrite service :: getFileView :: error", error);
       return null;
     }
   }
