@@ -6,9 +6,7 @@ export default function Footer() {
     <footer className="bg-gray-50 border-t border-gray-200 py-12">
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Left: Logo + Links */}
           <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-            {/* Logo */}
             <div className="flex items-center space-x-2">
               <div className="bg-gradient-to-br from-primary to-primary-light rounded-xl p-2">
                 <img
@@ -19,7 +17,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Navigation */}
             <ul className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
               <li>
                 <a
@@ -64,7 +61,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Right: Socials */}
           <div className="flex space-x-3">
             <a
               href="#"
@@ -90,7 +86,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Note */}
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
           © {new Date().getFullYear()}{" "}
           <span className="font-medium text-gray-700">Scroll</span>. Crafted

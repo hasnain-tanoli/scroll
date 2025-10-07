@@ -73,7 +73,6 @@ const PostForm = ({ post }) => {
       onSubmit={handleSubmit(submit)}
       className="max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl shadow-gray-300 p-10 my-16 flex flex-col lg:flex-row gap-10 transition-all duration-300"
     >
-      {/* Left Section - Content */}
       <div className="w-full lg:w-2/3 flex flex-col gap-6">
         <Input
           label="Title"
@@ -104,7 +103,6 @@ const PostForm = ({ post }) => {
         </div>
       </div>
 
-      {/* Right Section - Image, Status, Submit */}
       <div className="w-full lg:w-1/3 flex flex-col gap-6">
         <div>
           <Input

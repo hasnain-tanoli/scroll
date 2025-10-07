@@ -50,7 +50,6 @@ const Signup = () => {
         )}
 
         <form onSubmit={handleSubmit(createAccount)} className="space-y-5">
-          {/* Full Name */}
           <div>
             <Input
               label="Full Name"
@@ -76,7 +75,6 @@ const Signup = () => {
             )}
           </div>
 
-          {/* Email */}
           <div>
             <Input
               label="Email"
@@ -111,7 +109,6 @@ const Signup = () => {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <Input
               label="Password"
@@ -146,7 +143,6 @@ const Signup = () => {
             )}
           </div>
 
-          {/* Submit */}
           <Button
             type="submit"
             className="w-full flex items-center justify-center gap-2 rounded-lg bg-primary text-white py-2.5 font-medium hover:bg-primary/90 transition"

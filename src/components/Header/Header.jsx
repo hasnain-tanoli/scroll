@@ -22,7 +22,6 @@ export default function Header() {
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 py-4 sticky top-0 z-50">
       <Container>
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <div className="bg-gradient-to-br from-primary to-primary-light rounded-xl p-2">
@@ -35,7 +34,6 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map(
               (item) =>
@@ -52,7 +50,6 @@ export default function Header() {
             {authStatus ? <LogoutBtn /> : <LogInBtn />}
           </nav>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -63,7 +60,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {menuOpen && (
           <nav className="md:hidden mt-4 p-4 bg-white rounded-xl border border-gray-200 shadow-lg">
             <div className="flex flex-col gap-2">

@@ -22,7 +22,6 @@ class Service {
     return safeSlug || undefined;
   }
 
-  // 📝 Create a Post
   async createPost({ slug, title, content, featuredImage, status, userId }) {
     try {
       const safeId = this.makeSafeSlug(slug);
@@ -38,7 +37,6 @@ class Service {
     }
   }
 
-  // ✏️ Update a Post
   async updatePost(documentId, { title, content, featuredImage, status }) {
     try {
       return await this.databases.updateDocument(
@@ -53,7 +51,6 @@ class Service {
     }
   }
 
-  // ❌ Delete a Post
   async deletePost(documentId) {
     try {
       await this.databases.deleteDocument(
@@ -68,7 +65,6 @@ class Service {
     }
   }
 
-  // 📄 Get a Single Post
   async getPost(documentId) {
     try {
       return await this.databases.getDocument(
@@ -82,7 +78,6 @@ class Service {
     }
   }
 
-  // 🗂️ Get All Posts
   async getPosts(
     queries = [Query.equal("status", "active"), Query.orderDesc("$createdAt")]
   ) {
@@ -98,7 +93,6 @@ class Service {
     }
   }
 
-  // 📤 Upload File
   async uploadFile(file) {
     try {
       const uploadedFile = await this.bucket.createFile(
@@ -113,7 +107,6 @@ class Service {
     }
   }
 
-  // 🗑️ Delete File
   async deleteFile(fileId) {
     try {
       await this.bucket.deleteFile(conf.bucketID, fileId);
@@ -124,7 +117,6 @@ class Service {
     }
   }
 
-  // 🖼️ Get File Preview / View
   getFileView(fileId) {
     try {
       return this.bucket.getFileView(conf.bucketID, fileId);

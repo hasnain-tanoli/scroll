@@ -47,7 +47,6 @@ const Home = () => {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
       <section className="py-20 lg:py-28 text-center bg-gradient-to-b from-white to-gray-50/50">
         <Container>
           <div className="max-w-4xl mx-auto">
