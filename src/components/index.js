@@ -3,7 +3,7 @@ import Footer from "./Footer/Footer";
 import Container from "./container/Container";
 import LogInBtn from "./Header/LoginBtn";
 import LogoutBtn from "./Header/LogoutBtn";
-import Input from "./input";
+import Input from "./Input";
 import PostCard from "./PostCard";
 import Button from "./Button";
 import Login from "./Login";

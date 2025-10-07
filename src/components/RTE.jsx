@@ -22,6 +22,7 @@ const RTE = ({ name, control, label, defaultValue = "" }) => {
               height: 500,
               menubar: true,
               branding: false,
+              promotion: false,
               skin: "oxide",
               content_css: "default",
               statusbar: false,
